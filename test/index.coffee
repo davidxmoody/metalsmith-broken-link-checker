@@ -13,11 +13,9 @@ describe 'Metalsmith plugin', ->
         done()
 
   it 'should throw an error when there are broken links', (done) ->
-    fn = ->
-      Metalsmith(__dirname)
-        .source './src-broken-links'
-        .use blc()
-        .build (err) ->
-          throw err if err
-          done()
-    expect(fn).to.throw(Error)
+    Metalsmith(__dirname)
+      .source './src-broken-links'
+      .use blc()
+      .build (err) ->
+        expect(err).to.be.an.instanceof(Error)
+        done()

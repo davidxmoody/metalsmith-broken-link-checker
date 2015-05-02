@@ -22,12 +22,8 @@ class Link
 
     filePath = path.normalize(linkPath)
 
-    console.log filePath
     filePath not of files
-
-
     
-
   toString: ->
     "href: \"#{@href}\", text: \"#{@text}\""
 
