@@ -4,7 +4,7 @@
   "description": "Metalsmith plugin to check for internal broken links",
   "main": "lib",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --watch --compilers coffee:coffee-script/register",
     "prepublish": "coffee -o lib -c src/*.coffee"
   },
   "keywords": [
@@ -17,6 +17,11 @@
   "license": "MIT",
   "devDependencies": {
     "mocha": "~2.2.4",
-    "chai": "~2.3.0"
+    "chai": "~2.3.0",
+    "coffee-script": "~1.9.2",
+    "metalsmith": "~1.7.0"
+  },
+  "dependencies": {
+    "cheerio": "~0.19.0"
   }
 }
