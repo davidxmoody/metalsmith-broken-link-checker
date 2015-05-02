@@ -21,7 +21,7 @@ describe 'Metalsmith plugin', ->
         done()
 
   # Delete each file from the no-broken-links dir and expect an error
-  fn = (done) ->
+  deleteOneFile = (done) ->
     actualNumFiles = null
     fileIndexToDelete = this
 
@@ -41,4 +41,4 @@ describe 'Metalsmith plugin', ->
 
   numTestFiles = 5
   for i in [0...numTestFiles]
-    it 'should throw an error when there are broken links', fn.bind(i)
+    it 'should throw an error when there are broken links', deleteOneFile.bind(i)
