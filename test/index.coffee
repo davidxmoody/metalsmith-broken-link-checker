@@ -55,3 +55,31 @@ describe 'Metalsmith plugin', ->
       .build (err) ->
         expect(err).to.not.exist
         done()
+
+  it 'should not throw an error when options.warn is set', (done) ->
+    Metalsmith(__dirname)
+      .source './src-broken-links'
+      .use blc({warn: true})
+      .build (err) ->
+        expect(err).to.not.exist
+        done()
+
+  it 'should ignore broken images when options.checkImages is false', (done) ->
+    Metalsmith(__dirname)
+      .source './src-no-broken-links'
+      .use (files, metalsmith) ->
+        delete files['testimg.jpg']
+      .use blc({checkImages: false})
+      .build (err) ->
+        expect(err).to.not.exist
+        done()
+
+  it 'should ignore broken links when options.checkLinks is false', (done) ->
+    Metalsmith(__dirname)
+      .source './src-no-broken-links'
+      .use (files, metalsmith) ->
+        delete files['b.html']
+      .use blc({checkLinks: false})
+      .build (err) ->
+        expect(err).to.not.exist
+        done()

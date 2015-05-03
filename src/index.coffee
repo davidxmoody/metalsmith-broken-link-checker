@@ -37,13 +37,31 @@ class Link
 
 module.exports = (options) ->
 
+  options ?= {}
+  options.warn ?= false
+  options.checkLinks ?= true
+  options.checkImages ?= true
+
+  if options.checkLinks and options.checkImages
+    selector = 'a, img'
+  else if options.checkLinks
+    selector = 'a'
+  else if options.checkImages
+    selector = 'img'
+  else
+    # Check nothing so just return nop function
+    return ->
+
   (files, metalsmith) ->
     for filename, file of files
 
       contents = file.contents.toString()
       $ = cheerio.load(contents)
 
-      $('a, img').each ->
+      $(selector).each ->
         link = new Link $(this)
         if link.isBroken(filename, files)
-          throw new Error "Link is broken: #{link.toString()}, in file: #{filename}"
+          if options.warn
+            console.log "Warning: Link is broken: #{link.toString()}, in file: #{filename}"
+          else
+            throw new Error "Link is broken: #{link.toString()}, in file: #{filename}"
