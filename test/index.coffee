@@ -39,7 +39,7 @@ describe 'Metalsmith plugin', ->
         expect(err).to.be.an.instanceof(Error)
         done()
 
-  numTestFiles = 6
+  numTestFiles = 8
   for i in [0...numTestFiles]
     it 'should throw an error when there are broken links', deleteOneFile.bind(i)
 

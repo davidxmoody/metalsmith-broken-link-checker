@@ -3,8 +3,13 @@ cheerio = require 'cheerio'
 
 class Link
   constructor: ($link) ->
-    @text = $link.text()
-    @href = $link.attr('href')
+    if $link.is('a')
+      @text = $link.text()
+      @href = $link.attr('href')
+
+    else if $link.is('img')
+      @text = $link.attr('alt')
+      @href = $link.attr('src')
 
   isBroken: (filename, files) ->
     uri = URI(@href).absoluteTo(filename)
@@ -38,7 +43,7 @@ module.exports = (options) ->
       contents = file.contents.toString()
       $ = cheerio.load(contents)
 
-      $('a').each ->
+      $('a, img').each ->
         link = new Link $(this)
         if link.isBroken(filename, files)
-          throw new Error "Link is broken: #{link.toString()}"
+          throw new Error "Link is broken: #{link.toString()}, in file: #{filename}"
