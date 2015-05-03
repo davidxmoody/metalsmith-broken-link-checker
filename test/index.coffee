@@ -83,3 +83,25 @@ describe 'Metalsmith plugin', ->
       .build (err) ->
         expect(err).to.not.exist
         done()
+
+  it 'should allow empty links when options.allowEmpty is true', (done) ->
+    Metalsmith(__dirname)
+      .source './src-no-broken-links'
+      .use (files, metalsmith) ->
+        files['testfile.html'] =
+          contents: new Buffer '<a href="">Empty link ref</a>'
+      .use blc({allowEmpty: true})
+      .build (err) ->
+        expect(err).to.not.exist
+        done()
+
+  it 'should not allow empty links when options.allowEmpty is false', (done) ->
+    Metalsmith(__dirname)
+      .source './src-no-broken-links'
+      .use (files, metalsmith) ->
+        files['testfile.html'] =
+          contents: new Buffer '<a href="">Empty link ref</a>'
+      .use blc({allowEmpty: false})
+      .build (err) ->
+        expect(err).to.be.an.instanceof(Error)
+        done()

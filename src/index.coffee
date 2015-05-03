@@ -15,12 +15,16 @@ class Link
       @text = $link.attr('alt')
       @href = $link.attr('src')
 
-  isBroken: (filename, files) ->
+  isBroken: (filename, files, allowEmpty) ->
     uri = URI(@href)
 
     # Empty link is always broken
     if @href is ''
-      true
+      not allowEmpty
+
+    # Allow link to '#'
+    else if @href is '#'
+      false
 
     # Automatically accept all external links (could change later)
     else if uri.hostname()
@@ -55,6 +59,7 @@ module.exports = (options) ->
   options.warn ?= false
   options.checkLinks ?= true
   options.checkImages ?= true
+  options.allowEmpty ?= false
 
   if options.checkLinks and options.checkImages
     selector = 'a, img'
@@ -76,7 +81,7 @@ module.exports = (options) ->
 
       $(selector).each ->
         link = new Link $(this)
-        if link.isBroken(filename, files)
+        if link.isBroken(filename, files, options.allowEmpty)
           if options.warn
             console.log "Warning: Link is broken: #{link.toString()}, in file: #{filename}"
           else
