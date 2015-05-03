@@ -4,15 +4,15 @@ Metalsmith plugin to check for internal broken links
 
 ## About
 
-Small typos can often result in unexpected broken links. This plugin aims to help catch those errors as early as possible.
+Small typos can often result in *unexpected* broken links. This plugin aims to catch them as early as possible.
 
 It checks for *relative* and *root-relative* broken links which reference other files in the Metalsmith pipeline. It (currently) ignores all *absolute* links.
 
 Any broken links will cause an `Error` to be thrown (or a warning to be printed if `options.warn` is set). 
 
-By default, all `href` attributes of `<a>` tags and all `src` attributes of `<img>` tags are checked. This can be configured with `options.checkLinks` and `options.checkImages`.
+By default, all `href` attributes of `<a>` tags and all `src` attributes of `<img>` tags are checked. 
 
-The plugin uses [cheerio](https://www.npmjs.com/package/cheerio) to find link and image tags and [URIjs](https://www.npmjs.com/package/URIjs) to manipulate URLs. 
+This plugin uses [cheerio](https://www.npmjs.com/package/cheerio) to find link and image tags and [URIjs](https://www.npmjs.com/package/URIjs) to manipulate URLs. 
 
 ## Example
 
@@ -44,7 +44,7 @@ In your Metalsmith source dir, you have the following file (`dir1/test-file.html
 </html>
 ```
 
-Note that links to directories are allowed if they have a trailing slash (the `index.html` file will be looked for). However links to directories without a trailing slash are not allowed (even if they may redirect to the correct URL later). 
+Note that links to directories are allowed if they have a trailing slash (the `index.html` file will be looked for). However links to directories without a trailing slash are not allowed (even if they may redirect to the correct URL). 
 
 ## Installation
 
@@ -54,7 +54,17 @@ $ npm install --save metalsmith-broken-link-checker
 
 ## CLI Usage
 
-TODO?
+In `metalsmith.json`:
+
+```javascript
+{
+  "source": "src",
+  "destination": "build",
+  "plugins": {
+    "metalsmith-broken-link-checker": true
+  }
+}
+```
 
 ## JavaScript Usage
 

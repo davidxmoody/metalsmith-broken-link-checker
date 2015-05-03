@@ -60,6 +60,7 @@ class Link
 module.exports = (options) ->
 
   options ?= {}
+  if options is true then options = {} # Allow CLI to specify true
   options.warn ?= false
   options.checkLinks ?= true
   options.checkImages ?= true
