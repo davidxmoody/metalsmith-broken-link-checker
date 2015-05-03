@@ -2,6 +2,13 @@
   "name": "metalsmith-broken-link-checker",
   "version": "0.0.0",
   "description": "Metalsmith plugin to check for internal broken links",
+  "author": "David Moody <david@davidxmoody.com> (https://davidxmoody.com/)",
+  "homepage": "https://github.com/davidxmoody/metalsmith-broken-link-checker",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidxmoody/metalsmith-broken-link-checker.git"
+  },
   "main": "lib",
   "scripts": {
     "watch": "coffee --watch -o lib -c src/*.coffee & mocha --watch --compilers coffee:coffee-script/register",
@@ -16,8 +23,6 @@
     "broken-link-checker",
     "link-checker"
   ],
-  "author": "David Moody <david@davidxmoody.com> (https://davidxmoody.com/)",
-  "license": "MIT",
   "devDependencies": {
     "mocha": "~2.2.4",
     "chai": "~2.3.0",
