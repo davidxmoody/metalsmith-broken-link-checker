@@ -2,10 +2,11 @@ path = require 'path'
 cheerio = require 'cheerio'
 
 class Link
-  constructor: (@$link) ->
-    @text = @$link.text()
-    @href = @$link.attr('href')
+  constructor: ($link) ->
+    @text = $link.text()
+    @href = $link.attr('href')
 
+  #TODO allow absolute urls without issue
   isBroken: (filename, files) ->
     regex = /^(\/?)([a-zA-Z0-9\/.~_-]+?)(\/?)$/
 
