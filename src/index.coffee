@@ -63,7 +63,6 @@ module.exports = (options) ->
   options.warn ?= false
   options.checkLinks ?= true
   options.checkImages ?= true
-  options.allowEmpty ?= false
   options.allowRegex ?= null
 
   if options.checkLinks and options.checkImages
