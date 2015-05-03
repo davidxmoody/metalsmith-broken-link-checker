@@ -18,7 +18,7 @@ This plugin uses [cheerio](https://www.npmjs.com/package/cheerio) to find link a
 
 In your Metalsmith source dir, you have the following file (`dir1/test-file.html`):
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
