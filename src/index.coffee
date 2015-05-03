@@ -22,9 +22,9 @@ class Link
     if options.allowRegex? and options.allowRegex.exec(@href)
       false
 
-    # Empty link
+    # Empty link is always broken
     else if @href is ''
-      not options.allowEmpty
+      true
 
     # Allow link to '#'
     else if @href is '#'
