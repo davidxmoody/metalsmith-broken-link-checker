@@ -25,6 +25,7 @@
     "metalsmith": "~1.7.0"
   },
   "dependencies": {
-    "cheerio": "~0.19.0"
+    "cheerio": "~0.19.0",
+    "URIjs": "~1.15.0"
   }
 }

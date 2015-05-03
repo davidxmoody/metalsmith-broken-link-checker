@@ -9,7 +9,7 @@ describe 'Metalsmith plugin', ->
       .source './src-no-broken-links'
       .use blc()
       .build (err) ->
-        throw err if err
+        expect(err).to.not.exist
         done()
 
   it 'should throw an error when there are broken links', (done) ->
@@ -39,6 +39,19 @@ describe 'Metalsmith plugin', ->
         expect(err).to.be.an.instanceof(Error)
         done()
 
-  numTestFiles = 5
+  numTestFiles = 6
   for i in [0...numTestFiles]
     it 'should throw an error when there are broken links', deleteOneFile.bind(i)
+
+  it 'should allow all absolute URLs', (done) ->
+    Metalsmith(__dirname)
+      .source './src-no-broken-links'
+      .use (files, metalsmith) ->
+        files['testfile.html'] =
+          contents: new Buffer '<a href="https://davidxmoody.com/">Link to my blog</a>'
+        files['testfile2.html'] =
+          contents: new Buffer '<a href="http://www.google.com">Link to Google</a>'
+      .use blc()
+      .build (err) ->
+        expect(err).to.not.exist
+        done()

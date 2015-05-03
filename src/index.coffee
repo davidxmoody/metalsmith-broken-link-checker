@@ -1,4 +1,4 @@
-path = require 'path'
+URI = require 'URIjs'
 cheerio = require 'cheerio'
 
 class Link
@@ -6,24 +6,24 @@ class Link
     @text = $link.text()
     @href = $link.attr('href')
 
-  #TODO allow absolute urls without issue
   isBroken: (filename, files) ->
-    regex = /^(\/?)([a-zA-Z0-9\/.~_-]+?)(\/?)$/
+    uri = URI(@href).absoluteTo(filename)
 
-    [match, rootRelative, linkPath, isDir] = regex.exec(@href)
+    if @href is ''
+      true
 
-    if match is '/'
-      linkPath = '/index.html'
-    else if isDir
-      # Note, this does not accept links to dirs without a trailing slash
-      linkPath += '/index.html'
+    if uri.hostname()
+      # Could check external links here
+      false
 
-    unless rootRelative
-      linkPath = path.join(path.dirname(filename), linkPath)
+    else
+      linkPath = uri.path()
+      if linkPath.slice(-1) is '/'
+        linkPath += 'index.html'
+      if linkPath.charAt(0) is '/'
+        linkPath = linkPath.slice(1)
 
-    filePath = path.normalize(linkPath)
-
-    filePath not of files
+      linkPath not of files
     
   toString: ->
     "href: \"#{@href}\", text: \"#{@text}\""
