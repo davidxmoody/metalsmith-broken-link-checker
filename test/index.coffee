@@ -105,3 +105,25 @@ describe 'Metalsmith plugin', ->
       .build (err) ->
         expect(err).to.be.an.instanceof(Error)
         done()
+
+  it 'should allow links matching options.allowRegex', (done) ->
+    Metalsmith(__dirname)
+      .source './src-no-broken-links'
+      .use (files, metalsmith) ->
+        files['testfile.html'] =
+          contents: new Buffer '<a href="/nth/specialregex-2/index.html">Regex link</a>'
+      .use blc({allowRegex: /specialregex/})
+      .build (err) ->
+        expect(err).to.not.exist
+        done()
+
+  it 'should not allow broken links which do not match options.allowRegex', (done) ->
+    Metalsmith(__dirname)
+      .source './src-no-broken-links'
+      .use (files, metalsmith) ->
+        files['testfile.html'] =
+          contents: new Buffer '<a href="/nth/specialregex-2/index.html">Regex link</a>'
+      .use blc({allowRegex: /non-matching-regex/})
+      .build (err) ->
+        expect(err).to.be.an.instanceof(Error)
+        done()
