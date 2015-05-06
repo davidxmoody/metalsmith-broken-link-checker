@@ -6,7 +6,7 @@ Metalsmith plugin to check for internal broken links
 
 Small typos can often result in *unexpected* broken links. This plugin aims to catch them as early as possible.
 
-It checks for *relative* and *root-relative* broken links which reference other files in the Metalsmith pipeline. It (currently) ignores all *absolute* links.
+It checks for *relative* and *root-relative* links which do not have a corresponding file in the Metalsmith pipeline. It (currently) ignores all *absolute* links.
 
 Any broken links will cause an `Error` to be thrown (or a warning to be printed if `options.warn` is set). 
 
@@ -111,5 +111,7 @@ Metalsmith(__dirname)
 
 ## History
 
+- 0.1.1
+    - Updated README
 - 0.1.0
     - First release
