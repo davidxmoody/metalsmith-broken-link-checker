@@ -14,6 +14,8 @@ By default, all `href` attributes of `<a>` tags and all `src` attributes of `<im
 
 This plugin uses [cheerio](https://www.npmjs.com/package/cheerio) to find link and image tags and [URIjs](https://www.npmjs.com/package/URIjs) to manipulate URLs. 
 
+I also wrote a [blog post about what I learned developing this plugin](https://davidxmoody.com/publishing-my-first-npm-package/).
+
 ## Example
 
 In your Metalsmith source dir, you have the following file (`dir1/test-file.html`):
@@ -111,6 +113,8 @@ Metalsmith(__dirname)
 
 ## History
 
+- 0.1.2
+    - Updated README
 - 0.1.1
     - Updated README
 - 0.1.0
