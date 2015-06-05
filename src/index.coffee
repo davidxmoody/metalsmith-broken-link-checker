@@ -16,6 +16,10 @@ class Link
       @href = $link.attr('src')
 
   isBroken: (filename, files, options) ->
+    # Missing href is always broken
+    if not @href?
+      return true
+
     uri = URI(@href)
 
     # Allow anything matching the options.allowRegex regex
