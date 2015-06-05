@@ -113,6 +113,8 @@ Metalsmith(__dirname)
 
 ## History
 
+- 0.1.3
+    - Fail in the correct way for missing href attribute
 - 0.1.2
     - Updated README
 - 0.1.1
