@@ -40,6 +40,8 @@ In your Metalsmith source dir, you have the following file (`dir1/test-file.html
   <a href="#fragment">(Hash fragment link) Always valid</a>
   <a href="/dir2/#fragment">(Hash fragment link) Error if 'dir2/index.html' not in files</a>
 
+  <a>Missing href attribute, always broken</a>
+
   <img src="testimg.jpg" alt="(Relative link) Error if 'dir1/testimg.jpg' not in files">
   <img src="/testimg.jpg" alt="(Root-relative link) Error if 'testimg.jpg' not in files">
 </body>
