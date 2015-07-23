@@ -1,5 +1,6 @@
 URI = require 'URIjs'
 cheerio = require 'cheerio'
+path = require 'path'
 
 
 isHTML = (filename) ->
@@ -48,14 +49,19 @@ class Link
 
     # Need to transform uri.path() into something Metalsmith can recognise
     else
-      linkPath = uri.absoluteTo(filename).path()
+      unixFilename = filename.replace(/\\/g, '/')
+      linkPath = uri.absoluteTo(unixFilename).path()
+
       if linkPath.slice(-1) is '/'
         linkPath += 'index.html'
+
       if linkPath.charAt(0) is '/'
         linkPath = linkPath.slice(1)
 
+      filePath = linkPath.split('/').join(path.sep)
+
       # Check the linked file actually exists
-      linkPath not of files
+      filePath not of files
     
   toString: ->
     "href: \"#{@href}\", text: \"#{@text}\""
