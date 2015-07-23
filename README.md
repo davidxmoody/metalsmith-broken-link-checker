@@ -115,6 +115,8 @@ Metalsmith(__dirname)
 
 ## History
 
+- 0.1.4
+    - Normalize file paths for Windows
 - 0.1.3
     - Fail in the correct way for missing href attribute
 - 0.1.2
