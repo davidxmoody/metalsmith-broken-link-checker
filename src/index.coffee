@@ -11,12 +11,17 @@ class Link
     if $link.is('a')
       @text = $link.text()
       @href = $link.attr('href')
+      @isAnchor = $link.attr('name')?.length > 0 and not @href?
 
     else if $link.is('img')
       @text = $link.attr('alt')
       @href = $link.attr('src')
 
   isBroken: (filename, files, options) ->
+    # Allow anchors before checking for a missing href
+    if options.allowAnchors and @isAnchor
+      return false
+
     # Missing href is always broken
     if not @href?
       return true
@@ -25,43 +30,42 @@ class Link
 
     # Allow anything matching the options.allowRegex regex
     if options.allowRegex? and options.allowRegex.exec(@href)
-      false
+      return false
 
     # Empty link is always broken
-    else if @href is ''
-      true
+    if @href is ''
+      return true
 
     # Allow link to '#'
-    else if @href is '#'
-      false
+    if @href is '#'
+      return false
 
     # Automatically accept all external links (could change later)
-    else if uri.hostname()
-      false
+    if uri.hostname()
+      return false
 
     # Ignore mailto and other non-http/https links
-    else if uri.protocol() and uri.protocol not in ['http', 'https']
-      false
+    if uri.protocol() and uri.protocol not in ['http', 'https']
+      return false
 
     # Allow links to elements on the same page
-    else if uri.fragment() and not uri.path()
-      false
+    if uri.fragment() and not uri.path()
+      return false
 
     # Need to transform uri.path() into something Metalsmith can recognise
-    else
-      unixFilename = filename.replace(/\\/g, '/')
-      linkPath = uri.absoluteTo(unixFilename).path()
+    unixFilename = filename.replace(/\\/g, '/')
+    linkPath = uri.absoluteTo(unixFilename).path()
 
-      if linkPath.slice(-1) is '/'
-        linkPath += 'index.html'
+    if linkPath.slice(-1) is '/'
+      linkPath += 'index.html'
 
-      if linkPath.charAt(0) is '/'
-        linkPath = linkPath.slice(1)
+    if linkPath.charAt(0) is '/'
+      linkPath = linkPath.slice(1)
 
-      filePath = linkPath.split('/').join(path.sep)
+    filePath = linkPath.split('/').join(path.sep)
 
-      # Check the linked file actually exists
-      filePath not of files
+    # Check the linked file actually exists
+    return filePath not of files
     
   toString: ->
     "href: \"#{@href}\", text: \"#{@text}\""
@@ -75,6 +79,7 @@ module.exports = (options) ->
   options.checkLinks ?= true
   options.checkImages ?= true
   options.allowRegex ?= null
+  options.allowAnchors ?= true
 
   if options.checkLinks and options.checkImages
     selector = 'a, img'

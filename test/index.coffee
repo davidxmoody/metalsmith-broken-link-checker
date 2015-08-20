@@ -105,3 +105,36 @@ describe 'Metalsmith plugin', ->
       .build (err) ->
         expect(err).to.be.an.instanceof(Error)
         done()
+
+  it 'should allow anchors when allowAnchors is set', (done) ->
+    Metalsmith(__dirname)
+      .source './src-no-broken-links'
+      .use (files, metalsmith) ->
+        files['testfile.html'] =
+          contents: new Buffer '<a name="anchorname">anchor</a>'
+      .use blc({allowAnchors: true})
+      .build (err) ->
+        expect(err).to.not.exist
+        done()
+
+  it 'should not allow anchors when allowAnchors is not set', (done) ->
+    Metalsmith(__dirname)
+      .source './src-no-broken-links'
+      .use (files, metalsmith) ->
+        files['testfile.html'] =
+          contents: new Buffer '<a name="anchorname">anchor</a>'
+      .use blc({allowAnchors: false})
+      .build (err) ->
+        expect(err).to.exist
+        done()
+
+  it 'should not allow links with a name and href attribute if the href attribute is incorrect', (done) ->
+    Metalsmith(__dirname)
+      .source './src-no-broken-links'
+      .use (files, metalsmith) ->
+        files['testfile.html'] =
+          contents: new Buffer '<a href="broken" name="anchorname">anchor</a>'
+      .use blc({allowAnchors: true})
+      .build (err) ->
+        expect(err).to.exist
+        done()
