@@ -22,12 +22,9 @@ In your Metalsmith source dir, you have the following file (`dir1/test-file.html
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title></title>
-</head>
+<html>
 <body>
+
   <a href="/a.html">(Root-relative link) Error if 'a.html' not in files</a>
 
   <a href="a.html">(Relative link) Error if 'dir1/a.html' not in files</a>
@@ -44,6 +41,7 @@ In your Metalsmith source dir, you have the following file (`dir1/test-file.html
 
   <img src="testimg.jpg" alt="(Relative link) Error if 'dir1/testimg.jpg' not in files">
   <img src="/testimg.jpg" alt="(Root-relative link) Error if 'testimg.jpg' not in files">
+
 </body>
 </html>
 ```
@@ -94,6 +92,13 @@ Metalsmith(__dirname)
 - Optional regex gets matched against every found URL
 - Use it if you want to allow some specific URLs which would otherwise get recognised as broken
 
+#### `allowAnchors` (optional)
+
+( default: *true* )
+
+- An anchor is an `<a>` tag with a `name` attribute but no `href` attribute (used for jumping to elements on a page with hash fragments)
+- For example, with `allowAnchors` set to `true`, the following would be allowed: `<a name="anchor">Anchor text</a>`
+
 #### `checkImages` (optional)
 
 ( default: *true* )
@@ -115,6 +120,8 @@ Metalsmith(__dirname)
 
 ## History
 
+- 0.1.5
+    - Add allowAnchors option
 - 0.1.4
     - Normalize file paths for Windows
 - 0.1.3
