@@ -62,10 +62,14 @@ class Link
     if linkPath.charAt(0) is '/'
       linkPath = linkPath.slice(1)
 
-    filePath = linkPath.split('/').join(path.sep)
-
     # Check the linked file actually exists
-    return filePath not of files
+    if linkPath of files
+      return false
+
+    # Fallback for Windows paths
+    else
+      winPath = linkPath.split('/').join(path.sep)
+      return winPath not of files
     
   toString: ->
     "href: \"#{@href}\", text: \"#{@text}\""
