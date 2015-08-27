@@ -120,6 +120,8 @@ Metalsmith(__dirname)
 
 ## History
 
+- 0.1.6
+    - Fix forward slash Windows path bug
 - 0.1.5
     - Add allowAnchors option
 - 0.1.4
