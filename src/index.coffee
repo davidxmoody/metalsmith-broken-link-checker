@@ -1,4 +1,4 @@
-URI = require 'URIjs'
+URI = require 'urijs'
 cheerio = require 'cheerio'
 path = require 'path'
 

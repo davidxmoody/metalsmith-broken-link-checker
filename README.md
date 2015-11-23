@@ -12,7 +12,7 @@ Any broken links will cause an `Error` to be thrown (or a warning to be printed 
 
 By default, all `href` attributes of `<a>` tags and all `src` attributes of `<img>` tags are checked. 
 
-This plugin uses [cheerio](https://www.npmjs.com/package/cheerio) to find link and image tags and [URIjs](https://www.npmjs.com/package/URIjs) to manipulate URLs. 
+This plugin uses [cheerio](https://www.npmjs.com/package/cheerio) to find link and image tags and [urijs](https://www.npmjs.com/package/urijs) to manipulate URLs. 
 
 I also wrote a [blog post about what I learned developing this plugin](https://davidxmoody.com/publishing-my-first-npm-package/).
 
