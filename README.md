@@ -120,6 +120,8 @@ Metalsmith(__dirname)
 
 ## History
 
+- 0.1.7
+    - Change URIjs to urijs
 - 0.1.6
     - Fix forward slash Windows path bug
 - 0.1.5
