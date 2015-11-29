@@ -138,3 +138,25 @@ describe 'Metalsmith plugin', ->
       .build (err) ->
         expect(err).to.exist
         done()
+
+  it 'should throw an error for links to dirs when allowRedirects is not set', (done) ->
+    Metalsmith(__dirname)
+      .source './src-no-broken-links'
+      .use (files, metalsmith) ->
+        files['testfile.html'] =
+          contents: new Buffer '<a href="/dir2">would redirect</a>'
+      .use blc({allowRedirects: false})
+      .build (err) ->
+        expect(err).to.exist
+        done()
+
+  it 'should not throw an error for links to dirs when allowRedirects is set', (done) ->
+    Metalsmith(__dirname)
+      .source './src-no-broken-links'
+      .use (files, metalsmith) ->
+        files['testfile.html'] =
+          contents: new Buffer '<a href="/dir2">would redirect</a>'
+      .use blc({allowRedirects: true})
+      .build (err) ->
+        expect(err).to.not.exist
+        done()

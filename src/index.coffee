@@ -6,6 +6,21 @@ path = require 'path'
 isHTML = (filename) ->
   /\.html$/.exec(filename)
 
+fileExists = (files, filename) ->
+  # Remove leading slash before checking to match the Metalsmith files format
+  if filename.charAt(0) is '/'
+    filename = filename.slice(1)
+
+  # True if it exists in the files object
+  if filename of files
+    return true
+
+  # Fallback for Windows paths
+  else
+    winPath = filename.split('/').join(path.sep)
+    return winPath of files
+
+
 class Link
   constructor: ($link) ->
     if $link.is('a')
@@ -56,21 +71,20 @@ class Link
     unixFilename = filename.replace(/\\/g, '/')
     linkPath = uri.absoluteTo(unixFilename).path()
 
+    # Special case for link to root
+    if linkPath is '/'
+      return !fileExists(files, 'index.html')
+
+    # Allow links to directories with a trailing slash
     if linkPath.slice(-1) is '/'
       linkPath += 'index.html'
 
-    if linkPath.charAt(0) is '/'
-      linkPath = linkPath.slice(1)
-
-    # Check the linked file actually exists
-    if linkPath of files
+    # Allow links to directories without a trailing slash with allowRedirects option
+    if options.allowRedirects and fileExists(files, linkPath + '/index.html')
       return false
 
-    # Fallback for Windows paths
-    else
-      winPath = linkPath.split('/').join(path.sep)
-      return winPath not of files
-    
+    return !fileExists(files, linkPath)
+
   toString: ->
     "href: \"#{@href}\", text: \"#{@text}\""
 
@@ -84,6 +98,7 @@ module.exports = (options) ->
   options.checkImages ?= true
   options.allowRegex ?= null
   options.allowAnchors ?= true
+  options.allowAnchors ?= false
 
   if options.checkLinks and options.checkImages
     selector = 'a, img'
