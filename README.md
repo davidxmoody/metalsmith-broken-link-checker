@@ -46,7 +46,7 @@ In your Metalsmith source dir, you have the following file (`dir1/test-file.html
 </html>
 ```
 
-Note that links to directories are allowed if they have a trailing slash (the `index.html` file will be looked for). However links to directories without a trailing slash are not allowed (even if they may redirect to the correct URL). 
+Note that links to directories are allowed if they have a trailing slash (the `index.html` file will be looked for). However links to directories without a trailing slash are not allowed unless the `allowRedirects` option is set.
 
 ## Installation
 
@@ -92,6 +92,13 @@ Metalsmith(__dirname)
 - Optional regex gets matched against every found URL
 - Use it if you want to allow some specific URLs which would otherwise get recognised as broken
 
+#### `allowRedirects` (optional)
+
+( default: *false* )
+
+- If *false* then links to directories will only be allowed if the link ends with a trailing slash (e.g. `dir1/`)
+- If *true* then links to directories will be allowed with or without a trailing slash (e.g. `dir1/` or `dir1`)
+
 #### `allowAnchors` (optional)
 
 ( default: *true* )
@@ -120,6 +127,8 @@ Metalsmith(__dirname)
 
 ## History
 
+- 0.1.8
+    - Add allowRedirects option
 - 0.1.7
     - Change URIjs to urijs
 - 0.1.6
