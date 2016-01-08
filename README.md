@@ -1,6 +1,9 @@
 # metalsmith-broken-link-checker
 
-Metalsmith plugin to check for internal broken links
+[![npm version][npm-badge]][npm-url]
+[![Build Status][travis-badge]][travis-url]
+
+[Metalsmith][] plugin to check for internal broken links
 
 ## About
 
@@ -145,3 +148,9 @@ Metalsmith(__dirname)
     - Updated README
 - 0.1.0
     - First release
+
+[Metalsmith]: https://github.com/metalsmith/metalsmith
+[npm-badge]: https://img.shields.io/npm/v/metalsmith-broken-link-checker.svg
+[npm-url]: https://npmjs.com/package/metalsmith-broken-link-checker
+[travis-badge]: https://travis-ci.org/davidxmoody/metalsmith-broken-link-checker.svg
+[travis-url]: https://travis-ci.org/davidxmoody/metalsmith-broken-link-checker
