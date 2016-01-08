@@ -2,6 +2,7 @@
 
 [![npm version][npm-badge]][npm-url]
 [![Build Status][travis-badge]][travis-url]
+[![Dependency Status][david-badge]][david-url]
 
 [Metalsmith][] plugin to check for internal broken links
 
@@ -154,3 +155,5 @@ Metalsmith(__dirname)
 [npm-url]: https://npmjs.com/package/metalsmith-broken-link-checker
 [travis-badge]: https://travis-ci.org/davidxmoody/metalsmith-broken-link-checker.svg
 [travis-url]: https://travis-ci.org/davidxmoody/metalsmith-broken-link-checker
+[david-badge]: https://david-dm.org/davidxmoody/metalsmith-broken-link-checker.svg
+[david-url]: https://david-dm.org/davidxmoody/metalsmith-broken-link-checker
