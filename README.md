@@ -62,7 +62,7 @@ $ npm install --save metalsmith-broken-link-checker
 
 In `metalsmith.json`:
 
-```javascript
+```json
 {
   "source": "src",
   "destination": "build",
@@ -89,42 +89,30 @@ Metalsmith(__dirname)
 
 ### Options
 
-#### `allowRegex` (optional)
-
-( default: *null* )
+#### `allowRegex` (optional, default: *null* )
 
 - Optional regex gets matched against every found URL
 - Use it if you want to allow some specific URLs which would otherwise get recognised as broken
 
-#### `allowRedirects` (optional)
-
-( default: *false* )
+#### `allowRedirects` (optional, default: *false* )
 
 - If *false* then links to directories will only be allowed if the link ends with a trailing slash (e.g. `dir1/`)
 - If *true* then links to directories will be allowed with or without a trailing slash (e.g. `dir1/` or `dir1`)
 
-#### `allowAnchors` (optional)
-
-( default: *true* )
+#### `allowAnchors` (optional, default: *true* )
 
 - An anchor is an `<a>` tag with a `name` attribute but no `href` attribute (used for jumping to elements on a page with hash fragments)
 - For example, with `allowAnchors` set to `true`, the following would be allowed: `<a name="anchor">Anchor text</a>`
 
-#### `checkImages` (optional)
-
-( default: *true* )
+#### `checkImages` (optional, default: *true* )
 
 - Specifies whether or not to check `src` attributes of `<img>` tags
 
-#### `checkLinks` (optional)
-
-( default: *true* )
+#### `checkLinks` (optional, default: *true* )
 
 - Specifies whether or not to check `href` attributes of `<a>` tags
 
-#### `warn` (optional)
-
-( default: *false* )
+#### `warn` (optional, default: *false* )
 
 - If *false* then throw an `Error` when encountering the first broken link
 - If *true* then print warnings to stderr for every broken link
