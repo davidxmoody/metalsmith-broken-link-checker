@@ -1,6 +1,10 @@
 # metalsmith-broken-link-checker
 
-Metalsmith plugin to check for internal broken links
+[![npm version][npm-badge]][npm-url]
+[![Build Status][travis-badge]][travis-url]
+[![Dependency Status][david-badge]][david-url]
+
+[Metalsmith][] plugin to check for internal broken links
 
 ## About
 
@@ -58,7 +62,7 @@ $ npm install --save metalsmith-broken-link-checker
 
 In `metalsmith.json`:
 
-```javascript
+```json
 {
   "source": "src",
   "destination": "build",
@@ -85,42 +89,30 @@ Metalsmith(__dirname)
 
 ### Options
 
-#### `allowRegex` (optional)
-
-( default: *null* )
+#### `allowRegex` (optional, default: *null* )
 
 - Optional regex gets matched against every found URL
 - Use it if you want to allow some specific URLs which would otherwise get recognised as broken
 
-#### `allowRedirects` (optional)
-
-( default: *false* )
+#### `allowRedirects` (optional, default: *false* )
 
 - If *false* then links to directories will only be allowed if the link ends with a trailing slash (e.g. `dir1/`)
 - If *true* then links to directories will be allowed with or without a trailing slash (e.g. `dir1/` or `dir1`)
 
-#### `allowAnchors` (optional)
-
-( default: *true* )
+#### `allowAnchors` (optional, default: *true* )
 
 - An anchor is an `<a>` tag with a `name` attribute but no `href` attribute (used for jumping to elements on a page with hash fragments)
 - For example, with `allowAnchors` set to `true`, the following would be allowed: `<a name="anchor">Anchor text</a>`
 
-#### `checkImages` (optional)
-
-( default: *true* )
+#### `checkImages` (optional, default: *true* )
 
 - Specifies whether or not to check `src` attributes of `<img>` tags
 
-#### `checkLinks` (optional)
-
-( default: *true* )
+#### `checkLinks` (optional, default: *true* )
 
 - Specifies whether or not to check `href` attributes of `<a>` tags
 
-#### `warn` (optional)
-
-( default: *false* )
+#### `warn` (optional, default: *false* )
 
 - If *false* then throw an `Error` when encountering the first broken link
 - If *true* then print warnings to stderr for every broken link
@@ -145,3 +137,11 @@ Metalsmith(__dirname)
     - Updated README
 - 0.1.0
     - First release
+
+[Metalsmith]: https://github.com/metalsmith/metalsmith
+[npm-badge]: https://img.shields.io/npm/v/metalsmith-broken-link-checker.svg
+[npm-url]: https://npmjs.com/package/metalsmith-broken-link-checker
+[travis-badge]: https://travis-ci.org/davidxmoody/metalsmith-broken-link-checker.svg
+[travis-url]: https://travis-ci.org/davidxmoody/metalsmith-broken-link-checker
+[david-badge]: https://david-dm.org/davidxmoody/metalsmith-broken-link-checker.svg
+[david-url]: https://david-dm.org/davidxmoody/metalsmith-broken-link-checker
