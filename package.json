@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-broken-link-checker",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Metalsmith plugin to check for internal broken links",
   "author": "David Moody <david@davidxmoody.com> (https://davidxmoody.com/)",
   "homepage": "https://github.com/davidxmoody/metalsmith-broken-link-checker",
