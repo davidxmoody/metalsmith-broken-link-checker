@@ -119,24 +119,15 @@ Metalsmith(__dirname)
 
 ## History
 
-- 0.1.8
-    - Add allowRedirects option
-- 0.1.7
-    - Change URIjs to urijs
-- 0.1.6
-    - Fix forward slash Windows path bug
-- 0.1.5
-    - Add allowAnchors option
-- 0.1.4
-    - Normalize file paths for Windows
-- 0.1.3
-    - Fail in the correct way for missing href attribute
-- 0.1.2
-    - Updated README
-- 0.1.1
-    - Updated README
-- 0.1.0
-    - First release
+- **0.1.8** Add allowRedirects option
+- **0.1.7** Change URIjs to urijs
+- **0.1.6** Fix forward slash Windows path bug
+- **0.1.5** Add allowAnchors option
+- **0.1.4** Normalize file paths for Windows
+- **0.1.3** Fail in the correct way for missing href attribute
+- **0.1.2** Updated README
+- **0.1.1** Updated README
+- **0.1.0** First release
 
 [Metalsmith]: https://github.com/metalsmith/metalsmith
 [npm-badge]: https://img.shields.io/npm/v/metalsmith-broken-link-checker.svg
