@@ -71,8 +71,15 @@ class Link
     unixFilename = filename.replace(/\\/g, '/')
     linkPath = uri.absoluteTo(unixFilename).path()
 
+    # If baseURL then all internal links should be prefixed by it. 
+    if options.baseURL
+      # Given they are not "absolute" we assume they should have the baseURL as a prefix
+      if (linkPath.indexOf options.baseURL) is -1
+        return true
+      linkPath = linkPath.split(options.baseURL).join("");
+
     # Special case for link to root
-    if linkPath is '/'
+    if linkPath is '/' 
       return !fileExists(files, 'index.html')
 
     # Allow links to directories with a trailing slash
@@ -99,6 +106,7 @@ module.exports = (options) ->
   options.allowRegex ?= null
   options.allowAnchors ?= true
   options.allowAnchors ?= false
+  options.baseURL ?= null
 
   if options.checkLinks and options.checkImages
     selector = 'a, img'
