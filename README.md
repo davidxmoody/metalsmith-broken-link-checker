@@ -117,8 +117,15 @@ Metalsmith(__dirname)
 - If *false* then throw an `Error` when encountering the first broken link
 - If *true* then print warnings to stderr for every broken link
 
+#### `baseURL` (optional, default: *null* )
+
+- Should start with a slash, e.g. `/base`
+- Meant for sites which will be hosted within a subdirectory of another site
+- For example, if the output of your Metalsmith build will be hosted at `http://example.com/base/` then links to `/base/dir/file.html` will be valid if `dir/file.html` exists in the metalsmith pipeline
+
 ## History
 
+- **0.1.10** Add baseURL option
 - **0.1.9** Add CI badges to README
 - **0.1.8** Add allowRedirects option
 - **0.1.7** Change URIjs to urijs
