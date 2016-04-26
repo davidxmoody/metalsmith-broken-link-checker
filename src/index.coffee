@@ -67,19 +67,31 @@ class Link
     if uri.fragment() and not uri.path()
       return false
 
+    # Add baseURL in here so that the linkPath resolves to it in the case of
+    # a relative link
+    if options.baseURL
+      filename = path.join(options.baseURL, filename)
+
     # Need to transform uri.path() into something Metalsmith can recognise
     unixFilename = filename.replace(/\\/g, '/')
     linkPath = uri.absoluteTo(unixFilename).path()
 
-    # If baseURL then all internal links should be prefixed by it. 
+    # If baseURL then all internal links should be prefixed by it.
     if options.baseURL
-      # Given they are not "absolute" we assume they should have the baseURL as a prefix
-      if (linkPath.indexOf options.baseURL) is -1
+
+      # If the linkPath does not start with the baseURL then it is broken
+      if linkPath.indexOf(options.baseURL) isnt 0
         return true
-      linkPath = linkPath.split(options.baseURL).join("");
+
+      # Strip the baseURL out for checking whether the file exists in metalsmith
+      linkPath = linkPath.replace(options.baseURL, '')
+
+      # Fix bug where you were linking directly to the linkPath
+      if linkPath is ''
+        linkPath = '/'
 
     # Special case for link to root
-    if linkPath is '/' 
+    if linkPath is '/'
       return !fileExists(files, 'index.html')
 
     # Allow links to directories with a trailing slash

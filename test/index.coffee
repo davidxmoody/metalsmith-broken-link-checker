@@ -160,3 +160,22 @@ describe 'Metalsmith plugin', ->
       .build (err) ->
         expect(err).to.not.exist
         done()
+
+  it 'should throw an error for links that would be valid if not for a baseURL', (done) ->
+    Metalsmith(__dirname)
+      .source './src-base-url'
+      .use (files, metalsmith) ->
+        files['testfile.html'] =
+          contents: new Buffer '<a href="/a.html">would be valid of not for baseURL</a>'
+      .use blc({baseURL: '/base'})
+      .build (err) ->
+        expect(err).to.exist
+        done()
+
+  it 'should not throw an error for links with a valid baseURL', (done) ->
+    Metalsmith(__dirname)
+      .source './src-base-url'
+      .use blc({baseURL: '/base'})
+      .build (err) ->
+        expect(err).to.not.exist
+        done()
