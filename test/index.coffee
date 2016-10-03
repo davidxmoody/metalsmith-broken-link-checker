@@ -117,6 +117,17 @@ describe 'Metalsmith plugin', ->
         expect(err).to.not.exist
         done()
 
+  it 'should allow anchors using the id tag when allowAnchors is set ', (done) ->
+    Metalsmith(__dirname)
+      .source './src-no-broken-links'
+      .use (files, metalsmith) ->
+        files['testfile.html'] = 
+          contents: new Buffer '<a id="anchorname">anchor</a>'
+      .use blc({allowAnchors: true})
+      .build (err) ->
+        expect(err).to.not.exist
+        done()
+
   it 'should not allow anchors when allowAnchors is not set', (done) ->
     Metalsmith(__dirname)
       .source './src-no-broken-links'

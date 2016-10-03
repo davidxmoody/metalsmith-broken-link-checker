@@ -26,7 +26,7 @@ class Link
     if $link.is('a')
       @text = $link.text()
       @href = $link.attr('href')
-      @isAnchor = $link.attr('name')?.length > 0 and not @href?
+      @isAnchor = ($link.attr('name')?.length > 0 || $link.attr('id')?.length > 0) and not @href?
 
     else if $link.is('img')
       @text = $link.attr('alt')
