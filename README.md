@@ -125,6 +125,7 @@ Metalsmith(__dirname)
 
 ## History
 
+- **0.1.11** Allow anchors with id attributes
 - **0.1.10** Add baseURL option
 - **0.1.9** Add CI badges to README
 - **0.1.8** Add allowRedirects option
