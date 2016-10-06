@@ -24,13 +24,13 @@
     "link-checker"
   ],
   "devDependencies": {
-    "mocha": "^2.2.5",
     "chai": "^3.2.0",
     "coffee-script": "^1.9.3",
-    "metalsmith": "^2.1.0"
+    "metalsmith": "^2.1.0",
+    "mocha": "^3.1.0"
   },
   "dependencies": {
-    "cheerio": "^0.19.0",
+    "cheerio": "^0.22.0",
     "urijs": "^1.17.0"
   }
 }
