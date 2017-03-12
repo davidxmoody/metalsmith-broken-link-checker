@@ -9,10 +9,10 @@
     "type": "git",
     "url": "https://github.com/davidxmoody/metalsmith-broken-link-checker.git"
   },
-  "main": "lib",
+  "main": "src",
   "scripts": {
-    "test-watch": "mocha --watch --compilers coffee:coffee-script/register",
-    "test": "mocha --compilers coffee:coffee-script/register"
+    "test": "mocha",
+    "test-watch": "mocha --watch"
   },
   "keywords": [
     "metalsmith",
@@ -24,7 +24,6 @@
   ],
   "devDependencies": {
     "chai": "^3.2.0",
-    "coffee-script": "^1.9.3",
     "metalsmith": "^2.1.0",
     "mocha": "^3.1.0"
   },
