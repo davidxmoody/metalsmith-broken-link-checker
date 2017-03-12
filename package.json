@@ -11,9 +11,8 @@
   },
   "main": "lib",
   "scripts": {
-    "watch": "coffee --watch -o lib -c src/*.coffee & mocha --watch --harmony --compilers coffee:coffee-script/register",
-    "test": "mocha --harmony --compilers coffee:coffee-script/register",
-    "prepublish": "coffee -o lib -c src/*.coffee"
+    "test-watch": "mocha --watch --compilers coffee:coffee-script/register",
+    "test": "mocha --compilers coffee:coffee-script/register"
   },
   "keywords": [
     "metalsmith",

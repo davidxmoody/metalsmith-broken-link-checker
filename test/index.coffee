@@ -1,6 +1,6 @@
 {expect} = require 'chai'
 Metalsmith = require 'metalsmith'
-blc = require '../lib'
+blc = require '../src'
 
 describe 'Metalsmith plugin', ->
 
