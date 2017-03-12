@@ -137,7 +137,6 @@ module.exports = (options) => {
   if (options.checkImages == null) { options.checkImages = true }
   if (options.allowRegex == null) { options.allowRegex = null }
   if (options.allowAnchors == null) { options.allowAnchors = true }
-  if (options.allowAnchors == null) { options.allowAnchors = false }
   if (options.baseURL == null) { options.baseURL = null }
 
   if (options.checkLinks && options.checkImages) {
