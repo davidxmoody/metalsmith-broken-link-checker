@@ -1,5 +1,5 @@
 function isHtml(filename) {
-  return /\.html$/.exec(filename)
+  return /\.html$/.test(filename)
 }
 
 module.exports = (files) => {

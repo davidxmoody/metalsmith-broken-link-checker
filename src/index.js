@@ -1,3 +1,8 @@
+const {filter, mapObjIndexed, map, values, flatten, pipe} = require("ramda")
+const addFilenameToLinks = require("./add-filename-to-links")
+const getFileContents = require("./get-file-contents")
+const pickHtmlFiles = require("./pick-html-files")
+const shouldCheckLink = require("./should-check-link")
 const normalizeFiles = require("./normalize-files")
 const isLinkBroken = require("./is-link-broken")
 const extractLinks = require("./extract-links")
@@ -31,29 +36,37 @@ module.exports = (options) => {
   if (options.baseURL == null) { options.baseURL = null }
 
   return (files) => {
-    const normalized = normalizeFiles(files)
+    // const normalized = normalizeFiles(files)
+    const normalized = files
 
-    const allLinks = Object.keys(normalized).reduce((acc, filename) => {
-      const html = normalized[filename]
-      const linksInFile = extractLinks({html, filename, options})
-      return acc.concat(linksInFile)
-    }, [])
+    function handleLinks(links) {
+      links.forEach((link) => {
+        const broken = isLinkBroken({
+          files,
+          fileExists,
+          link,
+          options,
+        })
 
-    allLinks.forEach((link) => {
-      const broken = isLinkBroken({
-        files,
-        fileExists,
-        link,
-        options,
-      })
-
-      if (broken) {
-        if (options.warn) {
-          console.log(`Warning: Link is broken: ${link.description}, in file: ${link.filename}`)
-        } else {
-          throw new Error(`Link is broken: ${link.description}, in file: ${link.filename}`)
+        if (broken) {
+          if (options.warn) {
+            console.log(`Warning: Link is broken: ${link.description}, in file: ${link.filename}`)
+          } else {
+            throw new Error(`Link is broken: ${link.description}, in file: ${link.filename}`)
+          }
         }
-      }
-    })
+      })
+    }
+
+    pipe(
+      pickHtmlFiles,
+      map(getFileContents),
+      map(extractLinks),
+      mapObjIndexed(addFilenameToLinks),
+      values,
+      flatten,
+      filter(shouldCheckLink(options)),
+      handleLinks
+    )(normalized)
   }
 }
