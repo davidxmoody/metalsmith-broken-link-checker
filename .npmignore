@@ -1,3 +1,4 @@
-/src/
-/test/
-/.travis.yml
+test/
+coverage/
+.travis.yml
+npm-debug.log
