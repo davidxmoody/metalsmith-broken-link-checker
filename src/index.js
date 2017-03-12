@@ -1,8 +1,7 @@
+const normalizeFiles = require("./normalize-files")
 const isLinkBroken = require("./is-link-broken")
 const extractLinks = require("./extract-links")
 const path = require("path")
-
-const isHTML = filename => /\.html$/.exec(filename)
 
 function fileExists(files, filename) {
   // Remove leading slash before checking to match the Metalsmith files format
@@ -32,11 +31,10 @@ module.exports = (options) => {
   if (options.baseURL == null) { options.baseURL = null }
 
   return (files) => {
-    const allFilenames = Object.keys(files)
-    const htmlFilenames = allFilenames.filter(isHTML)
+    const normalized = normalizeFiles(files)
 
-    const allLinks = htmlFilenames.reduce((acc, filename) => {
-      const html = files[filename].contents.toString()
+    const allLinks = Object.keys(normalized).reduce((acc, filename) => {
+      const html = normalized[filename]
       const linksInFile = extractLinks({html, filename, options})
       return acc.concat(linksInFile)
     }, [])
