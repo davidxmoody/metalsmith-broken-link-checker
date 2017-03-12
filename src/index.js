@@ -1,4 +1,4 @@
-const {filter, mapObjIndexed, map, values, flatten, pipe} = require("ramda")
+const {assoc, filter, mapObjIndexed, map, values, flatten, pipe} = require("ramda")
 const addFilenameToLinks = require("./add-filename-to-links")
 const getFileContents = require("./get-file-contents")
 const pickHtmlFiles = require("./pick-html-files")
@@ -39,25 +39,6 @@ module.exports = (options) => {
     // const normalized = normalizeFiles(files)
     const normalized = files
 
-    function handleLinks(links) {
-      links.forEach((link) => {
-        const broken = isLinkBroken({
-          files,
-          fileExists,
-          link,
-          options,
-        })
-
-        if (broken) {
-          if (options.warn) {
-            console.log(`Warning: Link is broken: ${link.description}, in file: ${link.filename}`)
-          } else {
-            throw new Error(`Link is broken: ${link.description}, in file: ${link.filename}`)
-          }
-        }
-      })
-    }
-
     pipe(
       pickHtmlFiles,
       map(getFileContents),
@@ -66,7 +47,35 @@ module.exports = (options) => {
       values,
       flatten,
       filter(shouldCheckLink(options)),
-      handleLinks
+      map(addBrokenStatus(files, fileExists, options)),
+      handleLinks(options)
     )(normalized)
+  }
+}
+
+function addBrokenStatus(files, fileExists, options) {
+  return (link) => {
+    const broken = isLinkBroken({
+      files,
+      fileExists,
+      link,
+      options,
+    })
+
+    return assoc("broken", broken, link)
+  }
+}
+
+function handleLinks(options) {
+  return (links) => {
+    links.forEach((link) => {
+      if (link.broken) {
+        if (options.warn) {
+          console.log(`Warning: Link is broken: ${link.description}, in file: ${link.filename}`)
+        } else {
+          throw new Error(`Link is broken: ${link.description}, in file: ${link.filename}`)
+        }
+      }
+    })
   }
 }
