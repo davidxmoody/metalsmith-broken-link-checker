@@ -3,6 +3,7 @@ const addFilenameToLinks = require("./add-filename-to-links")
 const getFileContents = require("./get-file-contents")
 const pickHtmlFiles = require("./pick-html-files")
 const shouldCheckLink = require("./should-check-link")
+const handleLinks = require("./handle-links")
 const normalizeFiles = require("./normalize-files")
 const isLinkBroken = require("./is-link-broken")
 const extractLinks = require("./extract-links")
@@ -63,19 +64,5 @@ function addBrokenStatus(files, fileExists, options) {
     })
 
     return assoc("broken", broken, link)
-  }
-}
-
-function handleLinks(options) {
-  return (links) => {
-    links.forEach((link) => {
-      if (link.broken) {
-        if (options.warn) {
-          console.log(`Warning: Link is broken: ${link.description}, in file: ${link.filename}`)
-        } else {
-          throw new Error(`Link is broken: ${link.description}, in file: ${link.filename}`)
-        }
-      }
-    })
   }
 }
