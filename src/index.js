@@ -75,11 +75,6 @@ module.exports = (options) => {
       values,
       flatten,
       filter(shouldCheckLink(options)),
-      function(arg){
-        var test = files
-        var test2 = normalized;
-        return arg
-      },
       map(addBrokenStatus(files, filesToTargets, fileExists, fileHasTarget, options)),
       handleLinks(options)
     )(normalized)
