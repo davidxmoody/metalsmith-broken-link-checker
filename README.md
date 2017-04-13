@@ -112,6 +112,11 @@ Metalsmith(__dirname)
 
 - Specifies whether or not to check `href` attributes of `<a>` tags
 
+#### `checkAnchors` (optional, default: *false* )
+
+- Specifies whether or not to check the validity of hash fragments in links
+- For example `file.html#someid` could link to a valid file but the file content could be missing the `someid` id or name on an element
+
 #### `warn` (optional, default: *false* )
 
 - If *false* then throw an `Error` when encountering the first broken link
