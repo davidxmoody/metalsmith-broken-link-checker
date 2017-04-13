@@ -32,6 +32,7 @@ module.exports = (options) => {
   if (options.warn == null) { options.warn = false }
   if (options.checkLinks == null) { options.checkLinks = true }
   if (options.checkImages == null) { options.checkImages = true }
+  if (options.checkAnchors == null) {options.checkAnchors = false }
   if (options.allowRegex == null) { options.allowRegex = null }
   if (options.allowAnchors == null) { options.allowAnchors = true }
   if (options.baseURL == null) { options.baseURL = null }
