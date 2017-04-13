@@ -7,6 +7,7 @@ const handleLinks = require("./handle-links")
 const normalizeFiles = require("./normalize-files")
 const isLinkBroken = require("./is-link-broken")
 const extractLinks = require("./extract-links")
+const extractAnchorsTarget = require("./extract-anchor-targets")
 const path = require("path")
 
 function fileExists(files, filename) {
@@ -25,6 +26,25 @@ function fileExists(files, filename) {
   return winPath in files
 }
 
+function fileHasTarget(files, filename, target) {
+  // Remove leading slash before checking to match the Metalsmith files format
+  if (filename.charAt(0) === "/") {
+    filename = filename.slice(1)
+  }
+
+  if (!filename in files) {
+    filename = filename.split("/").join(path.sep)
+  }
+
+  //If we request no fragment, then it's available.
+  if(!target){
+    return true
+  }
+
+  return files[filename] && files[filename].indexOf(target) >= 0;
+
+}
+
 module.exports = (options) => {
 
   if (options == null) { options = {} }
@@ -41,6 +61,12 @@ module.exports = (options) => {
     // const normalized = normalizeFiles(files)
     const normalized = files
 
+    const filesToTargets = pipe(
+      pickHtmlFiles,
+      map(getFileContents),
+      map(extractAnchorsTarget)
+    )(normalized)
+
     pipe(
       pickHtmlFiles,
       map(getFileContents),
@@ -49,17 +75,24 @@ module.exports = (options) => {
       values,
       flatten,
       filter(shouldCheckLink(options)),
-      map(addBrokenStatus(files, fileExists, options)),
+      function(arg){
+        var test = files
+        var test2 = normalized;
+        return arg
+      },
+      map(addBrokenStatus(files, filesToTargets, fileExists, fileHasTarget, options)),
       handleLinks(options)
     )(normalized)
   }
 }
 
-function addBrokenStatus(files, fileExists, options) {
+function addBrokenStatus(files, filesToTargets, fileExists, fileHasTarget, options) {
   return (link) => {
     const broken = isLinkBroken({
       files,
+      filesToTargets,
       fileExists,
+      fileHasTarget,
       link,
       options,
     })

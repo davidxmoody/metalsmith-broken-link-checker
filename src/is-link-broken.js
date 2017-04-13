@@ -3,7 +3,9 @@ const path = require("path")
 
 module.exports = ({
   files,
+  filesToTargets,
   fileExists,
+  fileHasTarget,
   link: {
     target,
     type,
@@ -48,9 +50,11 @@ module.exports = ({
     return false
   }
 
+  const fragment = uri.fragment()
+
   // Allow links to elements on the same page
-  if (uri.fragment() && !uri.path()) {
-    return false
+  if (fragment && !uri.path()) {
+      return options.checkAnchors && !fileHasTarget(filesToTargets, linkPath.filename, fragment)
   }
 
   // Add baseURL in here so that the linkPath resolves to it in the case of
@@ -82,7 +86,7 @@ module.exports = ({
 
   // Special case for link to root
   if (linkPath === "/") {
-    return !fileExists(files, "index.html")
+    return !fileExists(files, "index.html") || (options.checkAnchors && !fileHasTarget(filesToTargets, "index.html", fragment))
   }
 
   // Allow links to directories with a trailing slash
@@ -95,5 +99,5 @@ module.exports = ({
     return false
   }
 
-  return !fileExists(files, linkPath)
+  return !fileExists(files, linkPath) || (options.checkAnchors && !fileHasTarget(filesToTargets, linkPath, fragment))
 }
