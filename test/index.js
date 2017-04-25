@@ -3,7 +3,6 @@ const Metalsmith = require("metalsmith")
 const blc = require("../src")
 
 describe("Metalsmith plugin", () => {
-
   it("should not complain when there are no broken links", (done) => {
     Metalsmith(__dirname)
       .source("./src-no-broken-links")
@@ -231,7 +230,7 @@ describe("Metalsmith plugin", () => {
       })
   })
 
-  //Tests on anchors
+  // Tests on anchors
   it("should not complain when there are no broken anchors", (done) => {
     Metalsmith(__dirname)
       .source("./src-no-broken-anchors")

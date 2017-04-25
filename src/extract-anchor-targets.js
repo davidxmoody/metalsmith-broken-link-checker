@@ -9,10 +9,10 @@ module.exports = (html) => {
 
   $(SELECTOR).each((index, element) => {
     const $target = $(element)
-    const $nameOrId = $target.attr("id") || $target.attr("name");
+    const nameOrId = $target.attr("id") || $target.attr("name")
 
-    if($nameOrId){
-        results.push($nameOrId)
+    if (nameOrId) {
+      results.push(nameOrId)
     }
   })
 

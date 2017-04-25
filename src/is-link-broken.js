@@ -54,7 +54,7 @@ module.exports = ({
 
   // Allow links to elements on the same page
   if (fragment && !uri.path()) {
-      return options.checkAnchors && !fileHasTarget(filesToTargets, filename, fragment)
+    return options.checkAnchors && !fileHasTarget(filesToTargets, filename, fragment)
   }
 
   // Add baseURL in here so that the linkPath resolves to it in the case of
