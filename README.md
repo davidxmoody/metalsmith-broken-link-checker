@@ -130,6 +130,10 @@ Metalsmith(__dirname)
 
 ## History
 
+- **1.0.0**
+    - CoffeeScript -> JavaScript rewrite
+    - Requires Node v6+ to run (breaking change)
+    - Add anchor target checking
 - **0.1.11** Allow anchors with id attributes
 - **0.1.10** Add baseURL option
 - **0.1.9** Add CI badges to README
