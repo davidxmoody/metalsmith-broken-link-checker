@@ -4,7 +4,6 @@ const getFileContents = require("./get-file-contents")
 const pickHtmlFiles = require("./pick-html-files")
 const shouldCheckLink = require("./should-check-link")
 const handleLinks = require("./handle-links")
-const normalizeFiles = require("./normalize-files")
 const isLinkBroken = require("./is-link-broken")
 const extractLinks = require("./extract-links")
 const extractAnchorTargets = require("./extract-anchor-targets")
@@ -57,7 +56,6 @@ module.exports = (options) => {
   if (options.baseURL == null) { options.baseURL = null }
 
   return (files) => {
-    // const normalized = normalizeFiles(files)
     const normalized = files
 
     // Skip calculations if not needed
