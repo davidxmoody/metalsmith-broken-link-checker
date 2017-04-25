@@ -230,4 +230,41 @@ describe("Metalsmith plugin", () => {
         done()
       })
   })
+
+  //Tests on anchors
+  it("should not complain when there are no broken anchors", (done) => {
+    Metalsmith(__dirname)
+      .source("./src-no-broken-anchors")
+      .use(blc({
+        checkAnchors: true
+      }))
+      .build((err) => {
+        expect(err).to.not.exist
+        done()
+      })
+  })
+
+  it("should throw an error when there are broken anchors", (done) => {
+    Metalsmith(__dirname)
+      .source("./src-broken-anchors")
+      .use(blc({
+        checkAnchors: true
+      }))
+      .build((err) => {
+        expect(err).to.be.an.instanceof(Error)
+        done()
+      })
+  })
+
+  it("should not throw an error when there are broken anchors but checks are not active", (done) => {
+    Metalsmith(__dirname)
+      .source("./src-broken-anchors")
+      .use(blc({
+        checkAnchors: false
+      }))
+      .build((err) => {
+        expect(err).to.not.exist
+        done()
+      })
+  })
 })
