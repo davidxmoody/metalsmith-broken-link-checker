@@ -10,6 +10,9 @@
     "url": "https://github.com/davidxmoody/metalsmith-broken-link-checker.git"
   },
   "main": "src",
+  "engines": {
+    "node": ">=6"
+  },
   "scripts": {
     "test": "mocha",
     "test-watch": "mocha --watch"
