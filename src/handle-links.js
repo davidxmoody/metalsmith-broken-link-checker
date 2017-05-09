@@ -8,10 +8,11 @@ function maybeLog(log, links) {
 
 function maybeThrow(links) {
   const brokenLinks = links.filter(({broken}) => !!broken)
+
   if (brokenLinks.length) {
-    let message = `You have ${brokenLinks.length} broken links:`
-    brokenLinks.forEach(({description}) => {
-      message += `\n${description}`
+    let message = `You have ${brokenLinks.length} broken links:\n`
+    brokenLinks.forEach(({filename, description}) => {
+      message += `\n${filename} >>> ${description}`
     })
     throw new Error(message)
   }
