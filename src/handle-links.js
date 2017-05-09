@@ -1,7 +1,7 @@
 function maybeLog(log, links) {
   links.forEach((link) => {
     if (link.broken) {
-      log(link.description)
+      log(`${link.filename} >>> ${link.description}`)
     }
   })
 }
