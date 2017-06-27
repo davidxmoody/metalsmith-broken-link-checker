@@ -130,6 +130,7 @@ Metalsmith(__dirname)
 
 ## History
 
+- **1.0.1** Add filenames to warnings
 - **1.0.0**
     - CoffeeScript -> JavaScript rewrite
     - Requires Node v6+ to run (breaking change)
