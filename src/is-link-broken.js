@@ -65,7 +65,7 @@ module.exports = ({
 
   // Need to transform uri.path() into something Metalsmith can recognise
   const unixFilename = filename.replace(/\\/g, "/")
-  let linkPath = uri.absoluteTo(unixFilename).path()
+  let linkPath = decodeURIComponent(uri.absoluteTo(unixFilename).path())
 
   // If baseURL then all internal links should be prefixed by it.
   if (options.baseURL) {
