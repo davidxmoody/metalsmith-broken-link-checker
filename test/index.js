@@ -24,7 +24,7 @@ describe("Metalsmith plugin", () => {
   })
 
   // Delete each file from the no-broken-links dir and expect an error
-  const numTestFiles = 8
+  const numTestFiles = 9
   const deleteOneFile = function(done) {
     let actualNumFiles = null
     const fileIndexToDelete = this
