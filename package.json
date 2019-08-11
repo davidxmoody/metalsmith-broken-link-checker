@@ -26,13 +26,13 @@
     "link-checker"
   ],
   "devDependencies": {
-    "chai": "^3.2.0",
+    "chai": "^4.2.0",
     "metalsmith": "^2.1.0",
-    "mocha": "^3.1.0"
+    "mocha": "^6.2.0"
   },
   "dependencies": {
     "cheerio": "^0.22.0",
-    "ramda": "^0.23.0",
+    "ramda": "^0.26.1",
     "urijs": "^1.18.10"
   }
 }
