@@ -61,9 +61,9 @@ describe("Metalsmith plugin", () => {
       .source("./src-no-broken-links")
       .use((files) => {
         files["testfile.html"] =
-          {contents: new Buffer('<a href="https://davidxmoody.com/">Link to my blog</a>')}
+          {contents: Buffer.from('<a href="https://davidxmoody.com/">Link to my blog</a>')}
         files["testfile2.html"] =
-          {contents: new Buffer('<a href="http://www.google.com">Link to Google</a>')}
+          {contents: Buffer.from('<a href="http://www.google.com">Link to Google</a>')}
       }).use(blc())
       .build((err) => {
         expect(err).to.not.exist
@@ -107,7 +107,7 @@ describe("Metalsmith plugin", () => {
     Metalsmith(__dirname)
       .source("./src-no-broken-links")
       .use((files) => {
-        files["testfile.html"] = {contents: new Buffer('<a href="/nth/specialregex-2/index.html">Regex link</a>')}
+        files["testfile.html"] = {contents: Buffer.from('<a href="/nth/specialregex-2/index.html">Regex link</a>')}
       })
       .use(blc({allowRegex: /specialregex/}))
       .build((err) => {
@@ -120,7 +120,7 @@ describe("Metalsmith plugin", () => {
     Metalsmith(__dirname)
       .source("./src-no-broken-links")
       .use((files) => {
-        files["testfile.html"] = {contents: new Buffer('<a href="/nth/specialregex-2/index.html">Regex link</a>')}
+        files["testfile.html"] = {contents: Buffer.from('<a href="/nth/specialregex-2/index.html">Regex link</a>')}
       })
       .use(blc({allowRegex: /non-matching-regex/}))
       .build((err) => {
@@ -133,7 +133,7 @@ describe("Metalsmith plugin", () => {
     Metalsmith(__dirname)
       .source("./src-no-broken-links")
       .use((files) => {
-        files["testfile.html"] = {contents: new Buffer('<a name="anchorname">anchor</a>')}
+        files["testfile.html"] = {contents: Buffer.from('<a name="anchorname">anchor</a>')}
       })
       .use(blc({allowAnchors: true}))
       .build((err) => {
@@ -146,7 +146,7 @@ describe("Metalsmith plugin", () => {
     Metalsmith(__dirname)
       .source("./src-no-broken-links")
       .use((files) => {
-        files["testfile.html"] = {contents: new Buffer('<a id="anchorname">anchor</a>')}
+        files["testfile.html"] = {contents: Buffer.from('<a id="anchorname">anchor</a>')}
       })
       .use(blc({allowAnchors: true}))
       .build((err) => {
@@ -159,7 +159,7 @@ describe("Metalsmith plugin", () => {
     Metalsmith(__dirname)
       .source("./src-no-broken-links")
       .use((files) => {
-        files["testfile.html"] = {contents: new Buffer('<a name="anchorname">anchor</a>')}
+        files["testfile.html"] = {contents: Buffer.from('<a name="anchorname">anchor</a>')}
       })
       .use(blc({allowAnchors: false}))
       .build((err) => {
@@ -172,7 +172,7 @@ describe("Metalsmith plugin", () => {
     Metalsmith(__dirname)
       .source("./src-no-broken-links")
       .use((files) => {
-        files["testfile.html"] = {contents: new Buffer('<a href="broken" name="anchorname">anchor</a>')}
+        files["testfile.html"] = {contents: Buffer.from('<a href="broken" name="anchorname">anchor</a>')}
       })
       .use(blc({allowAnchors: true}))
       .build((err) => {
@@ -185,7 +185,7 @@ describe("Metalsmith plugin", () => {
     Metalsmith(__dirname)
       .source("./src-no-broken-links")
       .use((files) => {
-        files["testfile.html"] = {contents: new Buffer('<a href="/dir2">would redirect</a>')}
+        files["testfile.html"] = {contents: Buffer.from('<a href="/dir2">would redirect</a>')}
       })
       .use(blc({allowRedirects: false}))
       .build((err) => {
@@ -198,7 +198,7 @@ describe("Metalsmith plugin", () => {
     Metalsmith(__dirname)
       .source("./src-no-broken-links")
       .use((files) => {
-        files["testfile.html"] = {contents: new Buffer('<a href="/dir2">would redirect</a>')}
+        files["testfile.html"] = {contents: Buffer.from('<a href="/dir2">would redirect</a>')}
       })
       .use(blc({allowRedirects: true}))
       .build((err) => {
@@ -211,7 +211,7 @@ describe("Metalsmith plugin", () => {
     Metalsmith(__dirname)
       .source("./src-base-url")
       .use((files) => {
-        files["testfile.html"] = {contents: new Buffer('<a href="/a.html">would be valid of not for baseURL</a>')}
+        files["testfile.html"] = {contents: Buffer.from('<a href="/a.html">would be valid of not for baseURL</a>')}
       })
       .use(blc({baseURL: "/base"}))
       .build((err) => {

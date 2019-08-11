@@ -4,7 +4,7 @@ const getFileContents = require("../src/get-file-contents")
 describe("getFileContents", () => {
   it("should return the stringified contents property", () => {
     const content = "my content"
-    const file = {contents: new Buffer(content)}
+    const file = {contents: Buffer.from(content)}
     expect(getFileContents(file)).to.eql(content)
   })
 
