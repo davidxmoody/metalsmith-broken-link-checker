@@ -12,7 +12,7 @@ Small typos can often result in *unexpected* broken links. This plugin aims to c
 
 It checks for *relative* and *root-relative* links which do not have a corresponding file in the Metalsmith pipeline. It (currently) ignores all *absolute* links.
 
-Any broken links will cause an `Error` to be thrown (or a warning to be printed if `options.warn` is set). 
+You can configure it to `Error` or log a warning or write to a file if any broken links are found.
 
 By default, all `href` attributes of `<a>` tags and all `src` attributes of `<img>` tags are checked. 
 
@@ -121,6 +121,10 @@ Metalsmith(__dirname)
 
 - If *false* then throw an `Error` when encountering the first broken link
 - If *true* then print warnings to stderr for every broken link
+
+#### `write_to_file` (optional, default: *false* )
+
+- If *true* then write all broken links to `broken_links.txt`.  This applies independently from the `warn` setting.
 
 #### `baseURL` (optional, default: *null* )
 
