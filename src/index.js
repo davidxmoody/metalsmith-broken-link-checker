@@ -47,6 +47,7 @@ module.exports = (options) => {
 
   if (options == null) { options = {} }
   if (options === true) { options = {} } // Allow CLI to specify true
+  if (options.write_to_file == null) { options.write_to_file = false }
   if (options.warn == null) { options.warn = false }
   if (options.checkLinks == null) { options.checkLinks = true }
   if (options.checkImages == null) { options.checkImages = true }
