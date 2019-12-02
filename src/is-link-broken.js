@@ -84,8 +84,8 @@ module.exports = ({
     }
   }
 
-  // Special case for link to root
-  if (linkPath === "/") {
+  // Special case for link to root (absolute or relative)
+  if (linkPath === "/" || linkPath === "") {
     return !fileExists(files, "index.html") || (options.checkAnchors && !fileHasTarget(filesToTargets, "index.html", fragment))
   }
 
