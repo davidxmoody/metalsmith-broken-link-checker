@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-broken-link-checker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Metalsmith plugin to check for internal broken links",
   "author": "David Moody <david@davidxmoody.com> (https://davidxmoody.com/)",
   "homepage": "https://github.com/davidxmoody/metalsmith-broken-link-checker",
@@ -26,13 +26,13 @@
     "link-checker"
   ],
   "devDependencies": {
-    "chai": "^4.2.0",
-    "metalsmith": "^2.1.0",
-    "mocha": "^6.2.0"
+    "chai": "^4.3.0",
+    "metalsmith": "^2.5.0",
+    "mocha": "^10.1.0"
   },
   "dependencies": {
-    "cheerio": "^0.22.0",
-    "ramda": "^0.26.1",
-    "urijs": "^1.18.10"
+    "cheerio": "^1.0.0-rc.12",
+    "ramda": "^0.28.0",
+    "urijs": "^1.19.0"
   }
 }
